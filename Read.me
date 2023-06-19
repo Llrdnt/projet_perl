@@ -1,0 +1,38 @@
+=====================================================
+Usage  : perl Sentiment_Analysis_project.pl [Chemin jusque la qase de données textuelles] [-FR, -EN] [-global,-media]
+=====================================================
+Exigences : 
+   - Installation du module GD::Graph::bars
+   - Accès aux documents (devant se trouver dans le même répertoire) :
+       - Scripts_secondaires//analyse_global.pl
+       - Scripts_secondaires//analyse_media.pl
+       - Lexiques_emotions//emotions_EN.txt
+       - Lexiques_emotions//emotions_FR.txt
+       - category.txt
+       - style.css
+=====================================================
+Informations : Ce programme est basé sur deux "sous-programmes" (la description de chacun d'entre eux est accessible dans les documents correspondants)
+L'objectif est d'effectuer une analyse de sentiments des termes mentionnés dans du contenu textuel. Pour ce faire, le script va analyser ligne
+par ligne, les sentiments évoqués dans le contenu textuel concerné. 
+L'analyse est effectuée sur base de deux lexiques de valence émotionnelle :  
+      - Ce lexique francophone (reprenant 1286 termes) : http://www.lexique.org/?page_id=492 
+      - Ce lexique anglophone (reprenant 14'177 termes) :https://doi.org/10.4224/21270984
+ 
+L'analyse peut-être effectuée sur des données textuelles anglophones (paramètre -EN) ou francophone (paramètre -FR). 
+Selon le mode sélectionné (-global ou -media), le script calculera le score de chaque émotion étudiée sur l'ensemble des lignes (mode global)
+ou uniquement sur les tweets comprenant une mention à un terme mentionné dans le document category.txt.
+
+En sortie, le programme générera un rapport .html présentant des représentations graphiques des analyses effectuées (ainsi qu'une série de graphiques au format .png).
+Il nous retournera également (dans le rapport .html), pour chaque émotion, la ligne ayant le score le plus élevé. 
+=====================================================
+=====================================================
+Structure et modification du document category.txt :
+
+Document reprenant les termes pour chaque catégorie. Actuellement, il est formé selon cette structure :
+CATEGORY#terme1%%terme2%%terme3%%terme4%%terme5
+
+Pour le modifier, il suffit de supprimer une ligne ou d'en ajouter. La catégorie représentant la clef qui se retrouvera dans le dictionnaire et les termes, des termes plus spécifiques devant
+se retrouver dans la ligne (pour qu'elle soit analysée). Il n'est donc pas nécessaire de mentionner uniquement des termes. Autrement dit la catégorie représente une catégorie et les @media, des termes spécifiques.
+Le programme est donc généralisable. Un score moyen pour chaque émotion sera calculé pour chaque catégorie, selon les termes* compris dans la liste.
+
+*Le programme prévoit que l'on travaille avec 5 termes, mais il est possible d'en mentionner plus ou moins (un message d'avertissement apparaîtra, mais sans arrêter le programme.).
